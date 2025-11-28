@@ -1,19 +1,19 @@
 @extends('layouts.clean')
 
-    @section('childContent')
+@section('childContent')
 
-        @include('layouts.partials.header')
+    @include('layouts.partials.header')
 
-        @yield('content')
+    @yield('content')
 
-        <footer>
-            @section('footerLinks')
-                <a href="">Link 1</a>
-                <a href="">Link 2</a>
-            @show
-        </footer>
+    <footer>
+        @section('footerLinks')
+            <a href="">Link 1</a>
+            <a href="">Link 2</a>
+        @show
+    </footer>
 
-    @endsection
+@endsection
 
 
 
