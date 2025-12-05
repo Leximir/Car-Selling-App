@@ -4,9 +4,12 @@
 
 @section('content')
 
-    <x-card>Card Content 1</x-card>
-    <x-card>Card Content 2</x-card>
-    <x-card>Card Content 3</x-card>
+    @php
+        $color = 'red';
+        $bgColor = 'blue';
+    @endphp
+
+    <x-card :$color :$bgColor>Card Content 1</x-card>
 
     <!-- Home Slider -->
     <section class="hero-slider">
