@@ -99,7 +99,7 @@
 
     <main>
 
-        <x-search-form></x-search-form>
+        <x-search-form action="/search" method="GET"></x-search-form>
 
         <!-- New Cars -->
         <section>
