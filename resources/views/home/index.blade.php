@@ -1,13 +1,4 @@
 <x-app-layout title="Home Page">
-    @php
-        $color = 'red';
-        $bgColor = 'blue'
-    @endphp
-    <x-card :$color :$bgColor class="card-rounded">
-        {{--    <x-card :color="$color" :bgColor="$bgColor">--}}
-        <x-slot:title class="card-header-blue">Card title 1</x-slot>
-        Card Content 1
-        <x-slot:footer>Card footer 1</x-slot>
     </x-card>
     <!-- Home Slider -->
         <section class="hero-slider">
@@ -113,8 +104,4 @@
         </section>
         <!--/ New Cars -->
     </main>
-    <x-slot:footerLinks>
-        <a href="#">Link 3</a>
-        <a href="#">Link 4</a>
-    </x-slot:footerLinks>
 </x-app-layout>
