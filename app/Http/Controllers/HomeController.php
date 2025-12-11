@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Maker;
 use App\Models\User;
 
@@ -10,9 +11,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        Maker::factory()
-            ->count(5)
-            ->hasModels(5)
+        User::factory()
+            ->has(Car::factory()->count(5), 'favouriteCars')
             ->create();
 
         return view('home.index');
