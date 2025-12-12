@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use App\Models\Maker;
 use App\Models\User;
 
 class HomeController extends Controller

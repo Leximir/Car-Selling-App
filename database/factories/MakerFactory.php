@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Maker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
