@@ -42,15 +42,15 @@
                                 <div class="find-a-car-inputs">
                                     <div class="form-group">
                                         <label class="mb-medium">Maker</label>
-                                        <x-select-maker></x-select-maker>
+                                        <x-select-maker :value="request('maker_id')"></x-select-maker>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-medium">Model</label>
-                                        <x-select-model></x-select-model>
+                                        <x-select-model :value="request('model_id')"></x-select-model>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-medium">Type</label>
-                                        <x-select-car-type></x-select-car-type>
+                                        <x-select-car-type :value="request('car_type_id')"></x-select-car-type>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-medium">Year</label>
@@ -90,15 +90,15 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-medium">State</label>
-                                        <x-select-state></x-select-state>
+                                        <x-select-state :value="request('state_id')"></x-select-state>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-medium">City</label>
-                                        <x-select-city></x-select-city>
+                                        <x-select-city :value="request('city_id')"></x-select-city>
                                     </div>
                                     <div class="form-group">
                                         <label class="mb-medium">Fuel Type</label>
-                                        <x-select-fuel-type></x-select-fuel-type>
+                                        <x-select-fuel-type :value="request('fuel_type_id')"></x-select-fuel-type>
                                     </div>
                                 </div>
                                 <div class="flex">
