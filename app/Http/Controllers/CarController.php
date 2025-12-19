@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\CarType;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,12 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $data = $request->all();
+
+        $data['user_id'] = 1;
+        $car = Car::create($data);
+
+        return redirect()->route('car.index');
     }
 
     /**
