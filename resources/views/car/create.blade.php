@@ -33,7 +33,10 @@
                                 </div>
                             </div>
                         </div>
-                        <x-radio-list-car-type></x-radio-list-car-type>
+                        <div class="form-group">
+                            <label>Car Type</label>
+                            <x-radio-list-car-type></x-radio-list-car-type>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
@@ -116,7 +119,7 @@
                                     />
                                 </svg>
                             </div>
-                            <input id="carFormImageUpload" type="file" multiple />
+                            <input id="carFormImageUpload" type="file" name="images[]" multiple />
                         </div>
                         <div id="imagePreviews" class="car-form-images"></div>
                     </div>
