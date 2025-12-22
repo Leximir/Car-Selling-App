@@ -38,6 +38,13 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->validate([
+            'maker_id' => 'required',
+            'model_id' => 'required',
+            'year' => 'required|integer|min:1900|max'.date('Y'),
+
+        ]);
+
         $data = $request->all();
         $featuresData = $data['features'] ?? [];
         $images = $request->file('images') ?: [];

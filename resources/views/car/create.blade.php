@@ -14,22 +14,30 @@
                     <div class="form-details">
                         <div class="row">
                             <div class="col">
-                                <div class="form-group">
+                                <div class="form-group @error('maker_id') has-error @enderror">
                                     <label>Maker</label>
                                     <x-select-maker></x-select-maker>
-                                    <p class="error-message">This field is required</p>
+                                    <p class="error-message">
+                                        {{ $errors->first('maker_id') }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group">
+                                <div class="form-group @error('model_id') has-error @enderror">
                                     <label>Model</label>
                                     <x-select-model></x-select-model>
+                                    <p class="error-message">
+                                        {{ $errors->first('maker_id') }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group">
+                                <div class="form-group @error('model_id') has-error @enderror">
                                     <label>Year</label>
                                     <x-select-year></x-select-year>
+                                    <p class="error-message">
+                                        {{ $errors->first('year') }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
