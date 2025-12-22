@@ -17,7 +17,7 @@
                         </div>
                         <div class="car-image-thumbnails">
                             @foreach($car->images as $image)
-                                <img src="{{ $image->imagePath }}" alt="" />
+                                <img src="{{ $image->getUrl() }}" alt="" />
                             @endforeach
                         </div>
                         <button class="carousel-button prev-button" id="prevButton">
