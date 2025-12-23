@@ -6,9 +6,6 @@ use App\Http\Requests\StoreCarRequest;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Session\Store;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\File;
 
 class CarController extends Controller
 {
