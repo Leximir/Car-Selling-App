@@ -199,4 +199,11 @@ class CarController extends Controller
             'cars' => $cars
         ]);
     }
+
+    public function carImages(Car $car)
+    {
+        return view('car.images', [
+            'car' => $car
+        ]);
+    }
 }

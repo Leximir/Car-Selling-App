@@ -51,7 +51,7 @@
                                         edit
                                     </a>
                                     <a
-                                        href="car_images.html"
+                                        href="{{ route('car.images', $car) }}"
                                         class="btn btn-edit inline-flex items-center"
                                     >
                                         <svg
