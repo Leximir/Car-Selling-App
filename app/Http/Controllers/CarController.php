@@ -206,4 +206,9 @@ class CarController extends Controller
             'car' => $car
         ]);
     }
+
+    public function updateImages()
+    {
+        
+    }
 }
