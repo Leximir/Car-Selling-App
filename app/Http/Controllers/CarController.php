@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCarRequest;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -40,8 +41,6 @@ class CarController extends Controller
     public function store(StoreCarRequest $request)
     {
         $data = $request->validated();
-
-        $data = $request->all();
         $featuresData = $data['features'] ?? [];
         $images = $request->file('images') ?: [];
 
@@ -207,8 +206,33 @@ class CarController extends Controller
         ]);
     }
 
-    public function updateImages()
+    public function updateImages(Request $request, Car $car)
     {
-        
+        $data = $request->validate([
+            'delete_images' => 'array',
+            'delete_images.*' => 'integer',
+            'positions' => 'array',
+            'positions.*' => 'integer',
+        ]);
+
+
+        $deleteImages = $data['delete_images'] ?? [];
+        $positions = $data['positions'] ?? [];
+
+        $imagesToDelete = $car->images()->whereIn('id', $deleteImages)->get();
+
+        foreach($imagesToDelete as $image) {
+            if(Storage::exists($image->image_path)){
+                Storage::delete($image->image_path);
+            }
+        }
+            $car->images()->whereIn('id', $deleteImages)->delete();
+
+            foreach($positions as $id => $position) {
+                $car->images()->where('id', $id)->update(['position' => $position]);
+            }
+
+            return redirect()->back();
+
     }
 }
