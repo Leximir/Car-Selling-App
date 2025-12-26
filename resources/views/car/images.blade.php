@@ -3,9 +3,9 @@
         <div>
             <div class="container">
                 <h1 class="car-details-page-title">Manage images for {{ $car->getTitle() }}</h1>
-                <div class="card p-medium">
-                    <div class="table-responsive">
-                        <form action="{{ route('car.updateImages', $car) }}" method="POST">
+                <div class="car-images-wrapper">
+                        <form action="{{ route('car.updateImages', $car) }}"
+                              class="car p-medium form-update-images"  method="POST">
                             @csrf
                             @method("PUT")
                             <table class="table">
@@ -51,7 +51,40 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                        <form action="{{ route('car.addImages', $car) }}" enctype="multipart/form-data"
+                              class="card form-images p-medium mb-large"  method="POST">
+                            @csrf
+                            <div class="form-image-upload">
+                                @foreach($errors->get('images.*') as $imageErrors)
+                                    @foreach($imageErrors as $error)
+                                        <div class="text-error mb-small">{{ $error }}</div>
+                                    @endforeach
+                                @endforeach
+                                <div class="upload-placeholder">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        style="width: 48px"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                        />
+                                    </svg>
+                                </div>
+                                <input id="carFormImageUpload" type="file" name="images[]" multiple />
+                            </div>
+                            <div id="imagePreviews" class="car-form-images"></div>
+
+                            <div class="flex justify-end gap-1">
+                                <button class="btn btn-primary">Add more Images</button>
+                            </div>
+                        </form>
+
                 </div>
             </div>
         </div>
