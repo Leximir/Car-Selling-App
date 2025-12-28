@@ -38,9 +38,10 @@
 
                 Add new Car
             </a>
+            @auth()
             <div class="navbar-menu" tabindex="-1">
                 <a href="javascript:void(0)" class="navbar-menu-handler">
-                    My Account
+                    Welcome, {{ \Illuminate\Support\Facades\Auth::user()->name }}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -70,6 +71,8 @@
                     </li>
                 </ul>
             </div>
+            @endauth
+            @guest()
             <a href="{{ route('signup') }}" class="btn btn-primary btn-signup">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -102,6 +105,7 @@
                 </svg>
                 Login
             </a>
+            @endguest
         </div>
     </div>
 </header>
