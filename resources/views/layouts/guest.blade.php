@@ -10,6 +10,15 @@
                             <img src="/img/logoipsum-265.svg" alt=""/>
                         </a>
                     </div>
+
+                    @session('success')
+                    <div class="my-large">
+                        <div class="success-message">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                    @endsession
+
                     {{ $slot }}
 
                     @if($socialAuth)
