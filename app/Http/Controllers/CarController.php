@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCarRequest;
 use App\Models\Car;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
@@ -13,9 +14,9 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = User::find(1)
+        $cars = $request->user()
             ->cars()
             ->with(['primaryImage', 'maker', 'model'])
             ->orderBy('created_at', 'desc')
@@ -44,7 +45,7 @@ class CarController extends Controller
         $featuresData = $data['features'] ?? [];
         $images = $request->file('images') ?: [];
 
-        $data['user_id'] = 1;
+        $data['user_id'] = Auth::id();
         $car = Car::create($data);
 
         $car->features()->create($featuresData);
@@ -77,6 +78,10 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
+        if($car->user_id !== Auth::id()){
+            abort(403);
+        }
+
         return view('car.edit', ['car' => $car]);
     }
 
@@ -85,6 +90,10 @@ class CarController extends Controller
      */
     public function update(StoreCarRequest $request, Car $car)
     {
+        if($car->user_id !== Auth::id()){
+            abort(403);
+        }
+
         $data = $request->validated();
 
         $features = array_merge([
@@ -115,6 +124,11 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
+
+        if($car->user_id !== Auth::id()){
+            abort(403);
+        }
+
         $car->delete();
 
         return redirect()->route('car.index')->with('success', 'Car was deleted');
@@ -192,7 +206,7 @@ class CarController extends Controller
 
     public function watchlist()
     {
-        $cars = User::find(4)
+        $cars = Auth::user()
             ->favouriteCars()
             ->with(['primaryImage', 'city', 'carType', 'fuelType', 'maker', 'model'])
             ->paginate(15);

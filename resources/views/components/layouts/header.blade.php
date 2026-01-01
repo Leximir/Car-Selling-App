@@ -104,7 +104,7 @@
                         fill=""
                     />
                 </svg>
-                Login Test
+                Login
             </a>
             @endguest
         </div>
