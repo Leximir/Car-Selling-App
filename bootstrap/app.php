@@ -12,7 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->append(EnsureTodayIsWeekend::class);
+//        $middleware->append(EnsureTodayIsWeekend::class);
+        $middleware->alias([
+            'weekend' => EnsureTodayIsWeekend::class
+        ]);
 //        $middleware->validateCsrfTokens(except: [
 //            'stripe/*',
 //            'car'
