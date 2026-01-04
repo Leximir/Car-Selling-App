@@ -14,6 +14,7 @@ class SelectModel extends Component
      * Create a new component instance.
      */
     public Collection $models;
+
     public function __construct()
     {
         $this->models = Model::orderBy('name')->get();

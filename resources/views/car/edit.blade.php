@@ -129,7 +129,8 @@
                         <x-checkbox-car-features :$car></x-checkbox-car-features>
                         <div class="form-group @error('description') has-error @enderror">
                             <label>Detailed Description</label>
-                            <textarea rows="10" name="description">{{ old('description', $car->description) }}</textarea>
+                            <textarea rows="10"
+                                      name="description">{{ old('description', $car->description) }}</textarea>
                             <p class="error-message">
                                 {{ $errors->first('description') }}
                             </p>

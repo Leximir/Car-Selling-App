@@ -19,7 +19,7 @@ class LoginController extends Controller
             'password' => ['required', 'string']
         ]);
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('home'))->with('success', 'Welcome back');
@@ -29,6 +29,7 @@ class LoginController extends Controller
             'email' => 'The provided credentials do not match our records'
         ])->onlyInput('email');
     }
+
     public function logout(Request $request)
     {
         Auth::logout();

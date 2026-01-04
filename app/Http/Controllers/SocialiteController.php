@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -19,16 +18,16 @@ class SocialiteController extends Controller
         try {
             $field = null;
 
-            if($provider === 'google'){
+            if ($provider === 'google') {
                 $field = 'google_id';
-            } else if($provider === 'facebook'){
+            } else if ($provider === 'facebook') {
                 $field = 'facebook_id';
             }
 
             $user = Socialite::driver($provider)->stateless()->user();
             $dbUser = User::where('email', $user->email)->first();
 
-            if($dbUser){
+            if ($dbUser) {
                 $dbUser->$field = $user->id;
                 $dbUser->save();
             } else {

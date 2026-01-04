@@ -166,7 +166,7 @@
                                     />
                                 </svg>
                             </div>
-                            <input id="carFormImageUpload" type="file" name="images[]" multiple />
+                            <input id="carFormImageUpload" type="file" name="images[]" multiple/>
                         </div>
                         <div id="imagePreviews" class="car-form-images"></div>
                     </div>

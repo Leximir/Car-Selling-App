@@ -14,6 +14,7 @@ class RadioListFuelType extends Component
      * Create a new component instance.
      */
     public Collection $fuelTypes;
+
     public function __construct()
     {
         $this->fuelTypes = FuelType::orderBy('name')->get();

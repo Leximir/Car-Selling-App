@@ -8,7 +8,8 @@
                     @if($cars->total() > 0)
                         <div class="pagination-summary">
                             <p>
-                                Showing {{ $cars->firstItem() }} to {{ $cars->lastItem() }} of {{ $cars->total() }} results
+                                Showing {{ $cars->firstItem() }} to {{ $cars->lastItem() }} of {{ $cars->total() }}
+                                results
                             </p>
                         </div>
                     @endif

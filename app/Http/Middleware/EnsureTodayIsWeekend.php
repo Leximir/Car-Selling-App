@@ -11,13 +11,13 @@ class EnsureTodayIsWeekend
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
 
         $dayOfWeek = \Illuminate\Support\now()->dayOfWeek;
-        if($dayOfWeek === 5 || $dayOfWeek === 0){
+        if ($dayOfWeek === 5 || $dayOfWeek === 0) {
             return $next($request);
         }
         abort(403, 'The website can only be accessed on weekends');

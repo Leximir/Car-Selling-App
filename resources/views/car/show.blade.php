@@ -17,7 +17,7 @@
                         </div>
                         <div class="car-image-thumbnails">
                             @foreach($car->images as $image)
-                                <img src="{{ $image->getUrl() }}" alt="" />
+                                <img src="{{ $image->getUrl() }}" alt=""/>
                             @endforeach
                         </div>
                         <button class="carousel-button prev-button" id="prevButton">
@@ -66,18 +66,30 @@
 
                         <ul class="car-specifications">
                             <x-car-specification :value="$car->features->air_conditioning">
-                                Air Conditioning </x-car-specification>
-                            <x-car-specification :value="$car->features->power_windows">Power Windows</x-car-specification>
-                            <x-car-specification :value="$car->features->power_door_locks">Power Door Locks</x-car-specification>
+                                Air Conditioning
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->power_windows">Power Windows
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->power_door_locks">Power Door Locks
+                            </x-car-specification>
                             <x-car-specification :value="$car->features->abs">ABS</x-car-specification>
-                            <x-car-specification :value="$car->features->cruise_control">Cruise Control</x-car-specification>
-                            <x-car-specification :value="$car->features->bluetooth_connectivity">Bluetooth Connectivity</x-car-specification>
-                            <x-car-specification :value="$car->features->remote_start">Remote Start</x-car-specification>
-                            <x-car-specification :value="$car->features->gps_navigation_system">GPS Navigation System</x-car-specification>
-                            <x-car-specification :value="$car->features->heated_seats">Heated Seats</x-car-specification>
-                            <x-car-specification :value="$car->features->climate_control">Climate Control</x-car-specification>
-                            <x-car-specification :value="$car->features->rear_parking_sensors">Rear Parking Sensors</x-car-specification>
-                            <x-car-specification :value="$car->features->leather_seats">Leather Seats</x-car-specification>
+                            <x-car-specification :value="$car->features->cruise_control">Cruise Control
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->bluetooth_connectivity">Bluetooth
+                                Connectivity
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->remote_start">Remote Start
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->gps_navigation_system">GPS Navigation System
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->heated_seats">Heated Seats
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->climate_control">Climate Control
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->rear_parking_sensors">Rear Parking Sensors
+                            </x-car-specification>
+                            <x-car-specification :value="$car->features->leather_seats">Leather Seats
+                            </x-car-specification>
                         </ul>
                     </div>
                 </div>
@@ -102,7 +114,7 @@
                         </button>
                     </div>
 
-                    <hr />
+                    <hr/>
                     <table class="car-details-table">
                         <tbody>
                         <tr>
@@ -139,7 +151,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    <hr />
+                    <hr/>
 
                     <div class="flex gap-1 my-medium">
                         <img

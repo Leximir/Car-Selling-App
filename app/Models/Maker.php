@@ -15,10 +15,12 @@ class Maker extends Model
     protected $fillable = [
         'name'
     ];
+
     public function cars(): HasMany
     {
         return $this->hasMany(Car::class);
     }
+
     public function models(): HasMany
     {
         return $this->hasMany(\App\Models\Model::class);

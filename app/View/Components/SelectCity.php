@@ -14,6 +14,7 @@ class SelectCity extends Component
      * Create a new component instance.
      */
     public Collection $cities;
+
     public function __construct()
     {
         $this->cities = City::orderBy('name')->get();

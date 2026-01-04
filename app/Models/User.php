@@ -39,6 +39,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    public function favouriteCars(): BelongsToMany
+    {
+        return $this->belongsToMany(Car::class, 'favourite_cars');
+    }
+
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -50,14 +60,5 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function favouriteCars(): BelongsToMany
-    {
-        return $this->belongsToMany(Car::class, 'favourite_cars');
-    }
-    public function cars(): HasMany
-    {
-        return $this->hasMany(Car::class);
     }
 }

@@ -14,6 +14,7 @@ class SelectCarType extends Component
      * Create a new component instance.
      */
     public Collection $carTypes;
+
     public function __construct()
     {
         $this->carTypes = CarType::orderBy('name')->get();

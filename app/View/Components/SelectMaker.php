@@ -14,6 +14,7 @@ class SelectMaker extends Component
      * Create a new component instance.
      */
     public Collection $makers;
+
     public function __construct()
     {
         $this->makers = Maker::orderBy('name')->get();

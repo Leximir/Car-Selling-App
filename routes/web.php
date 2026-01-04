@@ -23,7 +23,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::middleware(['verified'])->group(function() {
+    Route::middleware(['verified'])->group(function () {
         Route::get('/car/watchlist', [CarController::class, 'watchlist'])->name('car.watchlist');
         Route::resource('car', CarController::class)->except('show');
         Route::get('/car/{car}/images', [CarController::class, 'carImages'])
@@ -33,8 +33,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/car/{car}/images', [CarController::class, 'addImages'])
             ->name('car.addImages');
     });
-
-
 
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

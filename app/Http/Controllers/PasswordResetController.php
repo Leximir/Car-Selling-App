@@ -24,7 +24,7 @@ class PasswordResetController extends Controller
 
         $status = Password::sendResetLink($request->only('email'));
 
-        if($status === Password::RESET_LINK_SENT){
+        if ($status === Password::RESET_LINK_SENT) {
             return back()->with('success', __($status));
         }
 
@@ -33,7 +33,7 @@ class PasswordResetController extends Controller
 
     public function showResetPassword(string $token)
     {
-        return view('auth.reset-password',[
+        return view('auth.reset-password', [
             'token' => $token
         ]);
     }
@@ -54,7 +54,7 @@ class PasswordResetController extends Controller
 
         $status = Password::reset(
             $request->only(['email', 'password', 'password_confirmation', 'token']),
-            function (User $user, string $password){
+            function (User $user, string $password) {
                 $user->forceFill([
                     'password' => Hash::make($password)
                 ])->setRememberToken(Str::random(60));
@@ -64,7 +64,7 @@ class PasswordResetController extends Controller
                 event(new PasswordReset($user));
             });
 
-        if($status === Password::PASSWORD_RESET){
+        if ($status === Password::PASSWORD_RESET) {
             return redirect()->route('login')->with('success', __($status));
         }
 

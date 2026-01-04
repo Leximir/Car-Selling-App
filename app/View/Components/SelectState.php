@@ -14,6 +14,7 @@ class SelectState extends Component
      * Create a new component instance.
      */
     public Collection $states;
+
     public function __construct()
     {
         $this->states = State::orderBy('name')->get();

@@ -9,9 +9,9 @@
             </label>
         </div>
 
-    @if($loop->iteration % 4 == 0 && !$loop->last)
-    </div>
-    <div class="row">
+        @if($loop->iteration % 4 == 0 && !$loop->last)
+</div>
+<div class="row">
     @endif
 
     @endforeach

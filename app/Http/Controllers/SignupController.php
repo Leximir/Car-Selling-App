@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -12,11 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class SignupController extends Controller
 {
-    public function create()
-    {
-        return view('auth.signup');
-    }
-
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -44,5 +38,10 @@ class SignupController extends Controller
 
         return redirect()->route('home')->with('success', 'Account created Successfully. Please check
         your email to verify your account.');
+    }
+
+    public function create()
+    {
+        return view('auth.signup');
     }
 }

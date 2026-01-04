@@ -1,6 +1,6 @@
 <x-app-layout title="Home Page">
     <!-- Home Slider -->
-        <section class="hero-slider">
+    <section class="hero-slider">
         <!-- Carousel wrapper -->
         <div class="hero-slides">
             <!-- Item 1 -->

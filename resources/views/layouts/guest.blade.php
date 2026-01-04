@@ -29,9 +29,9 @@
                     @endif
 
                     @isset($footerLink)
-                    <div class="login-text-dont-have-account">
-                        {{ $footerLink }}
-                    </div>
+                        <div class="login-text-dont-have-account">
+                            {{ $footerLink }}
+                        </div>
                     @endisset
 
                 </div>

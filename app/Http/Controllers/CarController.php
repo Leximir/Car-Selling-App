@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCarRequest;
 use App\Models\Car;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -29,42 +28,11 @@ class CarController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('car.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCarRequest $request)
-    {
-        $data = $request->validated();
-        $featuresData = $data['features'] ?? [];
-        $images = $request->file('images') ?: [];
-
-        $data['user_id'] = Auth::id();
-        $car = Car::create($data);
-
-        $car->features()->create($featuresData);
-
-        foreach ($images as $i => $image){
-            $path = $image->store( 'images');
-            $car->images()->create(['image_path' => $path, 'position' => $i + 1]);
-        }
-
-
-        return redirect()->route('car.index')->with('success', 'Car was created');
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Car $car)
     {
-        if(!$car->published_at){
+        if (!$car->published_at) {
             abort('404');
         }
 
@@ -78,45 +46,11 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        if($car->user_id !== Auth::id()){
+        if ($car->user_id !== Auth::id()) {
             abort(403);
         }
 
         return view('car.edit', ['car' => $car]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(StoreCarRequest $request, Car $car)
-    {
-        if($car->user_id !== Auth::id()){
-            abort(403);
-        }
-
-        $data = $request->validated();
-
-        $features = array_merge([
-            'abs' => 0,
-            'air_conditioning' => 0,
-            'power_windows' => 0,
-            'power_door_locks' => 0,
-            'cruise_control' => 0,
-            'bluetooth_connectivity' => 0,
-            'remote_start' => 0,
-            'gps_navigation' => 0,
-            'heated_seats' => 0,
-            'climate_control' => 0,
-            'rear_parking_sensors' => 0,
-            'leather_seats' => 0,
-        ], $data['features'] ?? []);
-
-        $car->update($data);
-        $car->features->update($features);
-
-        // $request->session()->flash('success', 'Car was updated');
-
-        return redirect()->route('car.index')->with('success', 'Car was updated');
     }
 
     /**
@@ -125,7 +59,7 @@ class CarController extends Controller
     public function destroy(Car $car)
     {
 
-        if($car->user_id !== Auth::id()){
+        if ($car->user_id !== Auth::id()) {
             abort(403);
         }
 
@@ -154,42 +88,42 @@ class CarController extends Controller
         $query = Car::select('cars.*')->where('published_at', '<', now())
             ->with(['primaryImage', 'city', 'carType', 'fuelType', 'maker', 'model']);
 
-        if($maker){
+        if ($maker) {
             $query->where('maker_id', $maker);
         }
-        if($model){
-                $query->where('model_id', $model);
+        if ($model) {
+            $query->where('model_id', $model);
         }
-        if($fuelType){
-                $query->where('fuel_type_id', $fuelType);
+        if ($fuelType) {
+            $query->where('fuel_type_id', $fuelType);
         }
-        if($carType){
-                $query->where('car_type_id', $carType);
+        if ($carType) {
+            $query->where('car_type_id', $carType);
         }
-        if($yearFrom){
-                $query->where('year', '>=', $yearFrom);
+        if ($yearFrom) {
+            $query->where('year', '>=', $yearFrom);
         }
-        if($yearTo){
-                $query->where('year', '<=', $yearTo);
+        if ($yearTo) {
+            $query->where('year', '<=', $yearTo);
         }
-        if($priceFrom){
-                $query->where('price', '>=', $priceFrom);
+        if ($priceFrom) {
+            $query->where('price', '>=', $priceFrom);
         }
-        if($priceTo){
-                $query->where('price', '<=', $priceTo);
+        if ($priceTo) {
+            $query->where('price', '<=', $priceTo);
         }
-        if($state){
-                $query->join('cities', 'cities.id', '=', 'cars.city_id')
-                    ->where('state_id', $state);
+        if ($state) {
+            $query->join('cities', 'cities.id', '=', 'cars.city_id')
+                ->where('state_id', $state);
         }
-        if($city){
-                $query->where('city_id', $city);
+        if ($city) {
+            $query->where('city_id', $city);
         }
-        if($mileage){
-                $query->where('mileage', '<=', $mileage);
+        if ($mileage) {
+            $query->where('mileage', '<=', $mileage);
         }
 
-        if(str_starts_with($sort, '-')){
+        if (str_starts_with($sort, '-')) {
             $sort = substr($sort, 1);
             $query->orderBy($sort, 'desc');
         } else {
@@ -199,7 +133,7 @@ class CarController extends Controller
         $cars = $query->paginate(15)
             ->withQueryString();
 
-        return view('car.search',[
+        return view('car.search', [
             'cars' => $cars
         ]);
     }
@@ -237,19 +171,53 @@ class CarController extends Controller
 
         $imagesToDelete = $car->images()->whereIn('id', $deleteImages)->get();
 
-        foreach($imagesToDelete as $image) {
-            if(Storage::exists($image->image_path)){
+        foreach ($imagesToDelete as $image) {
+            if (Storage::exists($image->image_path)) {
                 Storage::delete($image->image_path);
             }
         }
-            $car->images()->whereIn('id', $deleteImages)->delete();
+        $car->images()->whereIn('id', $deleteImages)->delete();
 
-            foreach($positions as $id => $position) {
-                $car->images()->where('id', $id)->update(['position' => $position]);
-            }
+        foreach ($positions as $id => $position) {
+            $car->images()->where('id', $id)->update(['position' => $position]);
+        }
 
-            return redirect()->back()->with('success', 'Car images were updated');
+        return redirect()->back()->with('success', 'Car images were updated');
 
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(StoreCarRequest $request, Car $car)
+    {
+        if ($car->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        $data = $request->validated();
+
+        $features = array_merge([
+            'abs' => 0,
+            'air_conditioning' => 0,
+            'power_windows' => 0,
+            'power_door_locks' => 0,
+            'cruise_control' => 0,
+            'bluetooth_connectivity' => 0,
+            'remote_start' => 0,
+            'gps_navigation' => 0,
+            'heated_seats' => 0,
+            'climate_control' => 0,
+            'rear_parking_sensors' => 0,
+            'leather_seats' => 0,
+        ], $data['features'] ?? []);
+
+        $car->update($data);
+        $car->features->update($features);
+
+        // $request->session()->flash('success', 'Car was updated');
+
+        return redirect()->route('car.index')->with('success', 'Car was updated');
     }
 
     public function addImages(Request $request, Car $car)
@@ -258,7 +226,7 @@ class CarController extends Controller
 
         $maxPosition = $car->images()->max('position') ?? 0;
 
-        foreach($images as $image){
+        foreach ($images as $image) {
             $path = $image->store('images');
             $car->images()->create([
                 'image_path' => $path,
@@ -267,5 +235,36 @@ class CarController extends Controller
             $maxPosition++;
         }
         return redirect()->back()->with('success', 'New images images were added');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreCarRequest $request)
+    {
+        $data = $request->validated();
+        $featuresData = $data['features'] ?? [];
+        $images = $request->file('images') ?: [];
+
+        $data['user_id'] = Auth::id();
+        $car = Car::create($data);
+
+        $car->features()->create($featuresData);
+
+        foreach ($images as $i => $image) {
+            $path = $image->store('images');
+            $car->images()->create(['image_path' => $path, 'position' => $i + 1]);
+        }
+
+
+        return redirect()->route('car.index')->with('success', 'Car was created');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('car.create');
     }
 }
