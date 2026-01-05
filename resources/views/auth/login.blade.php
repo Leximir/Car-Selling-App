@@ -28,7 +28,7 @@
 
     <x-slot:footerLink>
         Don't have an account? -
-        <a href="{{ route('signup') }}"> Click here to create one</a>
+        <a href="{{ route('signup') }}"> Click here to create one</a> test
     </x-slot:footerLink>
 
 </x-guest-layout>
