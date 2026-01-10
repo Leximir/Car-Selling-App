@@ -36,7 +36,7 @@
                 </div>
             </form>
 
-            <form action="{{ route('profile.update') }}" method="POST" class="card p-large my-large">
+            <form action="{{ route('profile.updatePassword') }}" method="POST" class="card p-large my-large">
                 @csrf
                 @method('PUT')
                 <div class="form-group @error('current_password') has-error @enderror">
