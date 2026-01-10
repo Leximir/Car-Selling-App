@@ -15,7 +15,32 @@ class ProfileController extends Controller
     }
     public function update(Request $request)
     {
+        $rules = [
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255', 'unique:users,phone,'.$request->user()->id],
+        ];
 
+        $user = $request->user();
+
+        if(!$user->isOauthUser()){
+            $rules['email'] = ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id];
+        }
+
+        $data = $request->validate($rules);
+
+        $user->fill($data);
+
+        $success = 'Your Profile was updated';
+        if($user->isDirty('email')){
+            $user->email_verified_at = null;
+            $user->sendEmailVerificationNotification();
+            $success = 'Email Verification was sent. Please verify';
+        }
+
+        $user->save();
+
+        return redirect()->route('profile.index')
+            ->with('success', $success);
     }
 
     public function updatePassword()

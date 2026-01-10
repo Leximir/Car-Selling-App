@@ -8,7 +8,8 @@
                 @method('PUT')
                 <div class="form-group @error('name') has-error @enderror">
                     <label>Name</label>
-                    <input type="text" name="name" placeholder="Your Name" value="{{ old('name', $user->name) }}">
+                    <input type="text" name="name" placeholder="Your Name"
+                           value="{{ old('name', $user->name) }}" @disabled($user->isOauthUser())>
                     <p class="error-message">
                         {{ $errors->first('name') }}
                     </p>
